@@ -1,30 +1,22 @@
 <script>
-    let location = ""
-    let temperature = ""
-    let description = ""
+    let name = ""
+    let age = ""
 
-    async function getWeather() {
-    fetch('https://goweather.herokuapp.com/weather/' + location)
+    async function getName() {
+    fetch('https://api.agify.io/?name=' + name)
       .then((response) => response.json())
       .then((data) => {
-        temperature = data.temperature; // Path for temperature
-        description = data.description; // Path for description
+        age = data.age; 
       });
     }
 </script>
 
 
-<h1>Weather App</h1>
-<p>Temperature: {temperature}</p>
-<p>Description: {description}</p>
-<form on:submit|preventDefault={getWeather}>
-    <label for="location">Location:</label>
-    <input id="location" bind:value={location} type="text" />
+<h1>Guess Age</h1>
+
+<form on:submit|preventDefault={getName}>
+    <label for="name">Name:</label>
+    <input id="name" bind:value={name} type="text" />
     <button type="submit">Check</button>
 </form>
-
-
-
-
-  
-  
+<p>Age: {age}</p>
